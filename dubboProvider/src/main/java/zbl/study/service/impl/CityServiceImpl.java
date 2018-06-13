@@ -1,10 +1,9 @@
 package zbl.study.service.impl;
 
-import com.alibaba.dubbo.config.annotation.Service;
+import org.springframework.stereotype.Service;
 import zbl.study.model.City;
 import zbl.study.service.CityService;
-
-@Service(version = "1.1")
+@Service("cityService")
 public class CityServiceImpl implements CityService {
     @Override
     public City getCity() {

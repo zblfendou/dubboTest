@@ -1,18 +1,20 @@
 package zbl.study;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ImportResource;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import zbl.study.model.City;
-import zbl.study.service.CityService;
+import zbl.study.dubbo.interfaces.UserService;
+
+import javax.inject.Inject;
 
 @SpringBootApplication
+@ImportResource({"classpath:comsumer-dubbo.xml"})
 @RestController
 public class ConsumerApplication {
-    @Autowired
-    CityService cityService;
+    @Inject
+    UserService userService;
 
     public static void main(String[] args) {
         SpringApplication.run(ConsumerApplication.class, args);
@@ -21,7 +23,6 @@ public class ConsumerApplication {
 
     @RequestMapping("/consumer.do")
     public String consumer() {
-        City city = cityService.getCity();
-        return city.getName() + " " + city.getAddress();
+        return userService.getUser();
     }
 }
